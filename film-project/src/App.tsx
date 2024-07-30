@@ -1,11 +1,12 @@
 import React from 'react';
 import Navbar from './components/Navbar';
-import Profile from './pages/Profile';
+import ComicsPage from './pages/ComicsPage';
 
 const App = () => {
   return (
     <div>
       <Navbar />
+      <ComicsPage />
     </div>
   );
 };
