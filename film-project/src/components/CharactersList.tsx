@@ -1,18 +1,18 @@
 import React from 'react';
-import { Character } from './Chararcter';
-
+import { Character } from './models/Chararcter';
 type ComicsListProps = {
   characters: Character[];
 };
 
 const CharactersList = ({ characters }: ComicsListProps) => {
   return (
-    <div className="container gap-4 grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 md:gap-x-2 place-items-center">
+    // grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 md:gap-x-2
+    <div className=" gap-4 flex flex-wrap justify-center">
       {characters.map((character) => (
         <div className="card card-compact bg-base-100 max-w-80 w-auto shadow-xl">
           <figure>
             <img
-              // src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
               alt="Shoes"
             />
           </figure>
