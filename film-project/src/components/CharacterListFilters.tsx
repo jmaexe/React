@@ -26,43 +26,87 @@ const CharacterListFilters = ({ onChange }: CharacterListFiltersProps) => {
     'Elena',
   ];
   return (
-    <div className="w-full px-4 gap-4 mb-5 pb-5 flex justify-center">
-      <select
-        className="select select-info w-full max-w-xs"
-        defaultValue={'Select name'}
-        onChange={(e) => {
-          setNameFilter(e.target.value as CharacterFilters['name']);
-        }}
-      >
-        <option disabled>Select name</option>
-        {/* fetch all series 
+    <div className="w-full px-4 gap-5 mb-5 pb-5 flex justify-center">
+      <div className="flex items-center gap-2">
+        <select
+          className="select select-info select-sm w-full max-w-xs"
+          defaultValue={'Select name'}
+          onChange={(e) => {
+            setNameFilter(e.target.value as CharacterFilters['name']);
+          }}
+        >
+          <option disabled>Select name</option>
+          {/* fetch all series 
           <option>...</option> */}
-        {names.map((name) => (
-          <option value={name} key={name}>
-            {' '}
-            {name}{' '}
-          </option>
-        ))}
-      </select>
-      <select
-        className="select select-info w-full max-w-xs"
-        onChange={
-          (e) => {
-            setAgeFilter(+e.target.value as CharacterFilters['age']);
+          {names.map((name) => (
+            <option value={name} key={name}>
+              {' '}
+              {name}{' '}
+            </option>
+          ))}
+        </select>
+        {nameFilter && (
+          <button
+            className="badge badge-primary"
+            onClick={() => setNameFilter(undefined)}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              className="inline-block h-4 w-4 stroke-current"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg>
+          </button>
+        )}
+      </div>
+      <div className="flex items-center gap-2">
+        <select
+          className="select select-info select-sm w-full max-w-xs"
+          onChange={
+            (e) => {
+              setAgeFilter(+e.target.value as CharacterFilters['age']);
+            }
+            // setAgeFilter(+target.value)
           }
-          // setAgeFilter(+target.value)
-        }
-        defaultValue={'Select age'}
-      >
-        <option disabled>Select age</option>
-        {numbers.map((age) => (
-          <option value={age} key={age}>
-            {age}
-          </option>
-        ))}
-        {/* fetch all stories 
+          defaultValue={'Select age'}
+        >
+          <option disabled>Select age</option>
+          {numbers.map((age) => (
+            <option value={age} key={age}>
+              {age}
+            </option>
+          ))}
+          {/* fetch all stories 
           <option>...</option> */}
-      </select>
+        </select>
+        {ageFilter && (
+          <button
+            className="badge badge-primary"
+            onClick={() => setAgeFilter(undefined)}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              className="inline-block h-4 w-4 stroke-current"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg>
+          </button>
+        )}
+      </div>
     </div>
   );
 };
