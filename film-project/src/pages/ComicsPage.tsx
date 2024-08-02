@@ -3,6 +3,7 @@ import { Character } from '../components/models/Chararcter';
 import CharactersList from '../components/CharactersList';
 import CharacterListFilters from '../components/CharacterListFilters';
 import {
+  Card,
   CharacterFilters,
   fetchCharacters,
 } from '../components/models/Characters';
@@ -14,7 +15,8 @@ const ComicsPage = () => {
 
   const { data, isFetching } = useQuery({
     queryKey: ['characters', { age, name }],
-    queryFn: (): Character[] => fetchCharacters({ age, name }),
+    queryFn: () => fetchCharacters({ age, name }),
+    refetchOnWindowFocus: false,
   });
 
   return (
@@ -27,7 +29,7 @@ const ComicsPage = () => {
         }}
       />
       {data?.length == 0 && <p>Nessun Personaggio presente</p>}
-      {data && <CharactersList characters={data} />}
+      {/* {data && <CharactersList characters={data} />} */}
       {isFetching && <p>Loading...</p>}
     </div>
   );

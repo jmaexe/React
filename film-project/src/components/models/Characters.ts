@@ -1,3 +1,4 @@
+import axios, { AxiosResponse } from "axios";
 import { Character } from "./Chararcter";
 
 export type CharacterFilters = {
@@ -5,24 +6,27 @@ export type CharacterFilters = {
     age? : number;
 }
 
-export const fetchCharacters = (filters? : CharacterFilters) : Character[] => {
-    let filteredCharacters = [
-        { name: 'Luca', age: 2 },
-        { name: 'Giulia', age: 3 },
-        { name: 'Marco', age: 2 },
-        { name: 'Sara', age: 2 },
-        { name: 'Francesco', age: 5 },
-        { name: 'Anna', age: 1 },
-        { name: 'Alessandro', age: 1 },
-        { name: 'Martina', age: 4 },
-        { name: 'Matteo', age: 3 },
-        { name: 'Elena', age: 5 }, ]
+
+export interface Card {
+    id : string;
+    url: string;
+    width: number;
+    height: number;
+    breeds?: [];
+    favourite?: {}
+}
+
+
+export const fetchCharacters = async (filters? : CharacterFilters) : Promise<Card[]> => {
     
-    if(filters?.age) {
-        filteredCharacters = filteredCharacters.filter(c => c.age === filters.age)
-    }
-    if(filters?.name) { 
-        filteredCharacters = filteredCharacters.filter(c => c.name === filters.name)
-    }
-      return filteredCharacters
+    await new Promise<Card[]>((resolve) =>  setTimeout(resolve, 1000) )
+            const response = await axios.get('https://api.thecatapi.com/v1/images/search?limit=10')
+    // if(filters?.age) {
+    //     data = data.filter(c => c.age === filters.age)
+    // }
+    // if(filters?.name) { 
+    //     data = data.filter(c => c.name === filters.name)
+    // }
+
+      return response.data
 }

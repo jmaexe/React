@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { CharacterFilters } from './models/Characters';
 
 type CharacterListFiltersProps = {
@@ -8,6 +8,9 @@ type CharacterListFiltersProps = {
 const CharacterListFilters = ({ onChange }: CharacterListFiltersProps) => {
   const [nameFilter, setNameFilter] = useState<CharacterFilters['name']>();
   const [ageFilter, setAgeFilter] = useState<CharacterFilters['age']>();
+
+  const selectRefName = useRef<HTMLSelectElement | null>(null);
+  const selectRefAge = useRef<HTMLSelectElement | null>(null);
 
   useEffect(() => {
     onChange({ name: nameFilter, age: ageFilter });
@@ -25,17 +28,29 @@ const CharacterListFilters = ({ onChange }: CharacterListFiltersProps) => {
     'Matteo',
     'Elena',
   ];
+
+  const resetNameFilter = () => {
+    if (selectRefName.current) selectRefName.current.value = 'Select name';
+  };
+
+  const resetAgeFilter = () => {
+    if (selectRefAge.current) selectRefAge.current.value = 'Select age';
+  };
+
   return (
     <div className="w-full px-4 gap-5 mb-5 pb-5 flex justify-center">
       <div className="flex items-center gap-2">
         <select
+          ref={selectRefName}
           className="select select-info select-sm w-full max-w-xs"
           defaultValue={'Select name'}
           onChange={(e) => {
             setNameFilter(e.target.value as CharacterFilters['name']);
           }}
         >
-          <option disabled>Select name</option>
+          <option disabled defaultValue={'Select name'}>
+            Select name
+          </option>
           {/* fetch all series 
           <option>...</option> */}
           {names.map((name) => (
@@ -48,7 +63,10 @@ const CharacterListFilters = ({ onChange }: CharacterListFiltersProps) => {
         {nameFilter && (
           <button
             className="badge badge-primary"
-            onClick={() => setNameFilter(undefined)}
+            onClick={() => {
+              setNameFilter(undefined);
+              resetNameFilter();
+            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -69,6 +87,7 @@ const CharacterListFilters = ({ onChange }: CharacterListFiltersProps) => {
       <div className="flex items-center gap-2">
         <select
           className="select select-info select-sm w-full max-w-xs"
+          ref={selectRefAge}
           onChange={
             (e) => {
               setAgeFilter(+e.target.value as CharacterFilters['age']);
@@ -77,7 +96,9 @@ const CharacterListFilters = ({ onChange }: CharacterListFiltersProps) => {
           }
           defaultValue={'Select age'}
         >
-          <option disabled>Select age</option>
+          <option disabled value={'Select age'}>
+            Select age
+          </option>
           {numbers.map((age) => (
             <option value={age} key={age}>
               {age}
@@ -89,7 +110,10 @@ const CharacterListFilters = ({ onChange }: CharacterListFiltersProps) => {
         {ageFilter && (
           <button
             className="badge badge-primary"
-            onClick={() => setAgeFilter(undefined)}
+            onClick={() => {
+              setAgeFilter(undefined);
+              resetAgeFilter();
+            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
