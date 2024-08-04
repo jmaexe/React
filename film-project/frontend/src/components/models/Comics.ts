@@ -1,4 +1,4 @@
-export interface Comics {
+export interface Comic {
     id?: number;
     digitalId?:  number;
     title?: string;

@@ -3,8 +3,10 @@ const ts = 1;
 
 //aggiungere limit
 const getAllCharacters = async (req, res) => {
+  const { limit } = req.query;
+  console.log(limit);
   const response = await fetch(
-    `${process.env.BASE_URL}/characters?limit=5&apikey=${
+    `${process.env.BASE_URL}/characters?limit=${limit}&apikey=${
       process.env.PUBLIC_KEY
     }&hash=${md5(
       ts + process.env.PRIVATE_KEY + process.env.PUBLIC_KEY
