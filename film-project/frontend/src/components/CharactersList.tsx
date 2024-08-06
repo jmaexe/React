@@ -11,13 +11,13 @@ type CardProps = {
 const CharactersList = ({ characters }: ComicsListProps) => {
   return (
     // grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 md:gap-x-2
-    <div className=" gap-4 flex flex-wrap justify-center gap-y-6">
+    <div className=" gap-4 flex flex-wrap justify-center items-center gap-y-6">
       {characters.map((character) => (
         <>
-          <div className="card card-compact bg-base-100 max-w-80 w-auto shadow-x ">
+          <div className="card card-compact bg-base-100 w-full max-w-56 shadow-xl ">
             <figure>
               <img
-                className="max-w-md max-h-96"
+                className="max-w-md w-full sm:max-w-sm"
                 // src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
                 src={`${character.thumbnail?.path}.${character.thumbnail?.extension}`}
               />
@@ -45,7 +45,7 @@ const CharactersList = ({ characters }: ComicsListProps) => {
             className="modal-toggle"
           />
           <div className="modal" role="dialog">
-            <div className="modal-box w-fit max-w-5xl ">
+            <div className="modal-box">
               <h3 className="text-lg font-bold mb-2 text-primary">More info</h3>
               <p className="py-4 text-secondary">
                 Last modified: {character.modified}

@@ -4,10 +4,10 @@ import Profile from '../pages/Profile';
 const Navbar = () => {
   return (
     <>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-base-200">
         <div className="navbar-start">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <div tabIndex={0} role="button" className="btn btn-ghost sm:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -28,27 +28,16 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a>Item 1</a>
+                <a>Home</a>
               </li>
               <li>
-                <a>Parent</a>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a>Item 3</a>
+                <a>Comics</a>
               </li>
             </ul>
           </div>
           <a className="btn btn-ghost text-xl ">Marvel Comics</a>
         </div>
-        <div className="navbar-center hidden lg:flex">
+        <div className="navbar-center max-sm:hidden">
           <ul className="menu menu-horizontal px-1">
             <li>
               <a>Home</a>
@@ -60,9 +49,6 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           <div className="flex items-center gap-4">
-            <button className="badge badge-outline badge-secondary py-3 px-4">
-              Logout
-            </button>
             <div className="dropdown dropdown-hover dropdown-bottom dropdown-end">
               <div
                 className="avatar hover:cursor-pointer"
@@ -76,15 +62,22 @@ const Navbar = () => {
                   />
                 </div>
               </div>
-              <div
+              <ul
                 tabIndex={0}
-                className="dropdown-content bg-base-100 rounded-box z-[1] w-52 card-compact p-2 shadow-xl"
+                className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow items-center justify-center"
               >
-                <div className="card-body">
-                  <h2 className="text-primary">Nome Profilo</h2>
-                  <p>dati</p>
-                </div>
-              </div>
+                <li>
+                  <a>Item 1</a>
+                </li>
+                <li>
+                  <a>Item 2</a>
+                </li>
+                <li>
+                  <button className="btn btn-primary btn-outline btn-sm">
+                    Logout
+                  </button>
+                </li>
+              </ul>
             </div>
           </div>
         </div>

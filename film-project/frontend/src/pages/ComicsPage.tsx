@@ -20,7 +20,7 @@ const ComicsPage = () => {
   });
 
   return (
-    <div className="flex items-center flex-col w-full h-fit ">
+    <div className="flex items-center justify-center flex-col w-full h-fit ">
       <span className="font-bold text-3xl text-primary my-6">Comics Page</span>
       {/* <CharacterListFilters
         onChange={(filters: CharacterFilters) => {
