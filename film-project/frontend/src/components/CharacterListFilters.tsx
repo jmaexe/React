@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { CharacterFilters, fetchComics } from './models/Characters';
 import { useQuery } from '@tanstack/react-query';
-import { Comics } from './models/Comics';
 import ComicsList from './ComicsList';
 
 type CharacterListFiltersProps = {
@@ -23,34 +22,9 @@ const CharacterListFilters = ({ onChange }: CharacterListFiltersProps) => {
     refetchOnWindowFocus: false,
   });
 
-  // const comics = useMemo(() => fetchComics,[]);
   useEffect(() => {
     onChange({ limit });
   }, [limit]);
-  // useEffect(() => {
-  //   onChange({ name: nameFilter, age: ageFilter });
-  // }, [nameFilter, ageFilter]);
-  const numbers = [1, 2, 3, 4, 5, 6, 7, 8];
-  const names = [
-    'Luca',
-    'Giulia',
-    'Marco',
-    'Sara',
-    'Francesco',
-    'Anna',
-    'Alessandro',
-    'Martina',
-    'Matteo',
-    'Elena',
-  ];
-
-  const resetNameFilter = () => {
-    if (selectRefName.current) selectRefName.current.value = 'Select name';
-  };
-
-  const resetAgeFilter = () => {
-    if (selectRefAge.current) selectRefAge.current.value = 'Select age';
-  };
 
   return (
     <div className="w-full px-4 gap-5 mb-5 pb-5 flex justify-center">
