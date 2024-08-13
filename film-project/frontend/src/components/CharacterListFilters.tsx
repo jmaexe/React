@@ -10,8 +10,6 @@ type CharacterListFiltersProps = {
 };
 
 const CharacterListFilters = ({ onChange }: CharacterListFiltersProps) => {
-  // const [nameFilter, setNameFilter] = useState<CharacterFilters['name']>();
-  // const [ageFilter, setAgeFilter] = useState<CharacterFilters['age']>();
   const [limit, setLimit] = useState<CharacterFilters['limit']>(10);
   const [comics, setComics] = useState<CharacterFilters['comics']>('');
   const [name, setName] = useState<CharacterFilters['name']>('');
@@ -24,11 +22,9 @@ const CharacterListFilters = ({ onChange }: CharacterListFiltersProps) => {
   //   refetchOnWindowFocus: false,
   // });
 
-  // const comics = useMemo(() => fetchComics,[]);
   useEffect(() => {
     onChange({ limit, name: debouncedName });
   }, [limit, debouncedName]);
-
   return (
     <div className="w-full px-4 gap-5 mb-5 pb-5 flex justify-between">
       <div className="flex items-center gap-2">
