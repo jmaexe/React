@@ -3,30 +3,37 @@ import { Character } from '../components/models/Chararcter';
 import CharactersList from '../components/CharactersList';
 import CharacterListFilters from '../components/CharacterListFilters';
 import {
-  Card,
   CharacterFilters,
   fetchCharacters,
 } from '../components/models/Characters';
 import { useQuery } from '@tanstack/react-query';
+import Error from '../components/Error';
 
-const ComicsPage = () => {
-  // const [age, setAge] = useState<CharacterFilters['age']>();
-  // const [name, setName] = useState<CharacterFilters['name']>();
+const CharactersPage = () => {
   const [limit, setLimit] = useState<CharacterFilters['limit']>(10);
-  const { data, isFetching } = useQuery({
-    queryKey: ['characters', { limit }],
-    queryFn: () => fetchCharacters({ limit }),
+  const [name, setName] = useState<CharacterFilters['name']>('');
+  const { data, isFetching, error } = useQuery({
+    queryKey: ['characters', { limit, name }],
+    queryFn: () => fetchCharacters({ limit, name }),
     refetchOnWindowFocus: false,
+    refetchInterval: false,
+    refetchIntervalInBackground: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
   });
 
   return (
     <div className="flex items-center justify-center flex-col w-full h-fit ">
-      <span className="font-bold text-3xl text-primary my-6">Comics Page</span>
-      {/* <CharacterListFilters
+      <span className="font-bold text-3xl text-primary my-6">
+        Characters Page
+      </span>
+      <CharacterListFilters
         onChange={(filters: CharacterFilters) => {
           setLimit(filters.limit);
+          setName(filters.name);
         }}
-      /> */}
+      />
+      {error && <Error error={error} />}
       {data?.length == 0 && <p>Nessun Personaggio presente</p>}
       {data && <CharactersList characters={data} />}
       {isFetching && <p>Loading...</p>}
@@ -34,4 +41,4 @@ const ComicsPage = () => {
   );
 };
 
-export default ComicsPage;
+export default CharactersPage;

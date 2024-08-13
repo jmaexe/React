@@ -1,8 +1,8 @@
 import React from 'react';
-import { Comics } from './models/Comics';
+import { Comic } from './models/Comics';
 
 interface ComicsListProps {
-  comics: Comics[];
+  comics: Comic[];
 }
 
 const ComicsList = ({ comics }: ComicsListProps) => {

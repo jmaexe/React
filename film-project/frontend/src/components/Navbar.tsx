@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
-import Profile from '../pages/Profile';
+import React, { useContext, useState } from 'react';
+import ProfilePage from '../pages/ProfilePage';
+import { UserContext, UserContextType } from '../hooks/userContext';
+import { useUserContext } from '../hooks/hooks';
+import { Link, Outlet } from 'react-router-dom';
 
 const Navbar = () => {
+  const { user, setUser } = useUserContext();
   return (
     <>
       <div className="navbar bg-base-200">
@@ -28,60 +32,81 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a>Home</a>
+                <Link to={'home'}>Home</Link>
               </li>
               <li>
-                <a>Comics</a>
+                <Link to={'characters'}>Characters</Link>
               </li>
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl ">Marvel Comics</a>
+          <Link className="btn btn-ghost text-xl" to={'home'}>
+            Marvel Comics
+          </Link>
         </div>
         <div className="navbar-center max-sm:hidden">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <a>Home</a>
+              <Link to={'home'}>Home</Link>
             </li>
             <li>
-              <a>Comics</a>
+              <Link to={'characters'}>Characters</Link>
+            </li>
+            <li>
+              {user ? (
+                <button
+                  className="btn btn-primary btn-outline btn-sm h-full"
+                  onClick={() => setUser(undefined)}
+                >
+                  Logout
+                </button>
+              ) : (
+                <Link
+                  to={'login'}
+                  className="btn btn-primary btn-outline btn-sm h-full"
+                >
+                  Login
+                </Link>
+              )}
             </li>
           </ul>
         </div>
         <div className="navbar-end">
           <div className="flex items-center gap-4">
-            <div className="dropdown dropdown-hover dropdown-bottom dropdown-end">
-              <div
-                className="avatar hover:cursor-pointer"
-                tabIndex={0}
-                role="button"
-              >
+            <div
+              className="avatar hover:cursor-pointer"
+              tabIndex={0}
+              role="button"
+            >
+              {user && (
                 <div className="w-12 rounded-full">
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                    className="hover:opacity-60"
-                  />
+                  <Link to={'profile'}>
+                    <img
+                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                      className="hover:opacity-60"
+                    />
+                  </Link>
                 </div>
-              </div>
+              )}
+            </div>
+            {/* <div className="dropdown dropdown-hover dropdown-bottom dropdown-end">
               <ul
                 tabIndex={0}
                 className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow items-center justify-center"
               >
                 <li>
-                  <a>Item 1</a>
-                </li>
-                <li>
-                  <a>Item 2</a>
+                  <Link to={'profile'}>My profile</Link>
                 </li>
                 <li>
                   <button className="btn btn-primary btn-outline btn-sm">
                     Logout
                   </button>
                 </li>
-              </ul>
-            </div>
+              </ul> 
+            </div> */}
           </div>
         </div>
       </div>
+      <Outlet />
     </>
   );
 };

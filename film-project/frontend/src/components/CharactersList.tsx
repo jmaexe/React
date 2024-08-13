@@ -1,14 +1,10 @@
 import React from 'react';
 import { Character } from './models/Chararcter';
-import { Card } from './models/Characters';
-type ComicsListProps = {
+type CharactersListProps = {
   characters: Character[];
 };
-type CardProps = {
-  characters: Card[];
-};
 
-const CharactersList = ({ characters }: ComicsListProps) => {
+const CharactersList = ({ characters }: CharactersListProps) => {
   return (
     // grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 md:gap-x-2
     <div className=" gap-4 flex flex-wrap justify-center items-center gap-y-6">
@@ -18,7 +14,6 @@ const CharactersList = ({ characters }: ComicsListProps) => {
             <figure>
               <img
                 className="max-w-md w-full sm:max-w-sm"
-                // src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
                 src={`${character.thumbnail?.path}.${character.thumbnail?.extension}`}
               />
             </figure>
@@ -98,7 +93,6 @@ const CharactersList = ({ characters }: ComicsListProps) => {
                   <div className="collapse-content">
                     {character.events?.items?.map((event) => (
                       <>
-                        {console.log(character.events?.items)}
                         <br />
                         <a
                           className="text-secondary font-medium underline"
