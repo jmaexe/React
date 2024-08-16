@@ -2,11 +2,15 @@ import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useUserContext } from '../hooks/hooks';
 import { useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode, JwtPayload } from 'jwt-decode';
+import { User } from '../components/models/User';
+type FormFields = User;
 
-type FormFields = {
-  username: string;
-  password: string;
-};
+// {
+//   username: string;
+//   password: string;
+// };
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -82,9 +86,8 @@ const LoginPage = () => {
           )}
         </div>
         <div className="w-full">
-          {' '}
           <label
-            className={`input input-bordered flex items-center gap-2 ${
+            className={`input input-bordered flex items-center gap-2 w-full ${
               errors.password && 'focus-within:outline-error'
             }`}
           >
@@ -121,9 +124,36 @@ const LoginPage = () => {
             <p className="text-error">{errors.password.message}</p>
           )}
         </div>
-        <button className="btn btn-primary w-1/3 m-3" type="submit">
-          Login
-        </button>
+        <div className="grid items-center grid-cols-5 w-full p-2 m-2">
+          {/* w-1/3 */}
+          <div className="col-start-3">
+            <button className="btn btn-primary w-full" type="submit">
+              Login
+            </button>
+          </div>
+          <div className="col-start-4 grid place-items-center">
+            <span>or</span>
+          </div>
+          <div className="col-start-5 grid place-items-center">
+            <GoogleLogin
+              type="icon"
+              shape="circle"
+              onSuccess={(credentialResponse) => {
+                const data = credentialResponse.credential
+                  ? jwtDecode(credentialResponse.credential)
+                  : undefined;
+                const user = data as User;
+                console.log(user);
+                setUser(user);
+                navigate('/profile');
+                //email,family_name,given_name,name,picture
+              }}
+              onError={() => {
+                console.log('Google Login Error:');
+              }}
+            />
+          </div>
+        </div>
       </form>
     </div>
   );

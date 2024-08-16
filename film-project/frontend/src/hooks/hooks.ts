@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./userContext";
 
-export const useDebounce = <T,>(value: T, delay: number = 500) => {
+export const useDebounce = <T>(value: T, delay: number = 500) => {
     const [debouncedValue, setDebouncedValue] = useState(value);
     useEffect(() => {
         const timer = setTimeout(() => setDebouncedValue(value), delay);

@@ -1,12 +1,13 @@
 import React from 'react';
+import { IoIosWarning } from 'react-icons/io';
 type ErrorProps = {
   error: Error;
 };
 
 const Error = ({ error }: ErrorProps) => {
   return (
-    <div>
-      <span>{error.message}</span>
+    <div className="text-error text-xl flex flex-wrap items-center gap-2">
+      <IoIosWarning /> <p>{error.message}</p>
     </div>
   );
 };

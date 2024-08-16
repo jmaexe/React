@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import CharactersPage from './pages/CharactersPage';
 import Home from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
@@ -6,6 +6,7 @@ import NotFound from './pages/NotFound';
 import LoginPage from './pages/LoginPage';
 import Navbar from './components/Navbar';
 import LogoutPage from './pages/LogoutPage';
+import ProtectedRoute from './components/ProtectedRoute';
 
 export const router = createBrowserRouter([
   {
@@ -13,16 +14,25 @@ export const router = createBrowserRouter([
     element: <Navbar />,
     children: [
       {
-        path: '/home',
+        path: '/',
         element: <Home />,
+        index: true,
       },
       {
         path: '/characters',
-        element: <CharactersPage />,
+        element: (
+          <ProtectedRoute>
+            <CharactersPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/profile',
-        element: <ProfilePage />,
+        element: (
+          <ProtectedRoute>
+            <ProfilePage />
+          </ProtectedRoute>
+        ),
       },
       { path: '/login', element: <LoginPage /> },
     ],

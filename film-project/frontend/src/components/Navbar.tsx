@@ -2,9 +2,10 @@ import React, { useContext, useState } from 'react';
 import ProfilePage from '../pages/ProfilePage';
 import { UserContext, UserContextType } from '../hooks/userContext';
 import { useUserContext } from '../hooks/hooks';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const { user, setUser } = useUserContext();
   return (
     <>
@@ -37,6 +38,23 @@ const Navbar = () => {
               <li>
                 <Link to={'characters'}>Characters</Link>
               </li>
+              <li>
+                {user ? (
+                  <button
+                    className="btn btn-primary btn-outline btn-sm h-full"
+                    onClick={() => setUser(undefined)}
+                  >
+                    Logout
+                  </button>
+                ) : (
+                  <Link
+                    to={'login'}
+                    className="btn btn-primary btn-outline btn-sm h-full"
+                  >
+                    Login
+                  </Link>
+                )}
+              </li>
             </ul>
           </div>
           <Link className="btn btn-ghost text-xl" to={'home'}>
@@ -44,18 +62,23 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="navbar-center max-sm:hidden">
-          <ul className="menu menu-horizontal px-1">
+          <ul className="menu menu-horizontal px-1 gap-2">
             <li>
-              <Link to={'home'}>Home</Link>
+              <Link to={'/'}>Home</Link>
             </li>
-            <li>
-              <Link to={'characters'}>Characters</Link>
-            </li>
+            {user && (
+              <li>
+                <Link to={'/characters'}>Characters</Link>
+              </li>
+            )}
             <li>
               {user ? (
                 <button
                   className="btn btn-primary btn-outline btn-sm h-full"
-                  onClick={() => setUser(undefined)}
+                  onClick={() => {
+                    setUser(undefined);
+                    navigate('/login');
+                  }}
                 >
                   Logout
                 </button>
@@ -71,39 +94,24 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <div className="flex items-center gap-4">
-            <div
-              className="avatar hover:cursor-pointer"
-              tabIndex={0}
-              role="button"
-            >
-              {user && (
+          {user && (
+            <div className="flex items-center gap-4">
+              <div
+                className="avatar hover:cursor-pointer"
+                tabIndex={0}
+                role="button"
+              >
                 <div className="w-12 rounded-full">
                   <Link to={'profile'}>
                     <img
-                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                      className="hover:opacity-60"
+                      src={user?.picture}
+                      className=" transition hover:opacity-60"
                     />
                   </Link>
                 </div>
-              )}
+              </div>
             </div>
-            {/* <div className="dropdown dropdown-hover dropdown-bottom dropdown-end">
-              <ul
-                tabIndex={0}
-                className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow items-center justify-center"
-              >
-                <li>
-                  <Link to={'profile'}>My profile</Link>
-                </li>
-                <li>
-                  <button className="btn btn-primary btn-outline btn-sm">
-                    Logout
-                  </button>
-                </li>
-              </ul> 
-            </div> */}
-          </div>
+          )}
         </div>
       </div>
       <Outlet />
