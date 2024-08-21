@@ -2,7 +2,7 @@ import { List } from "./List";
 import { StorySummary, Summary } from "./Summary";
 
 export interface Character {
-  id?: number;
+  id: number;
   name?: string;
   description?: string;
   modified?: string;

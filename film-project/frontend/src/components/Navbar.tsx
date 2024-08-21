@@ -1,7 +1,5 @@
-import React, { useContext, useState } from 'react';
-import ProfilePage from '../pages/ProfilePage';
-import { UserContext, UserContextType } from '../hooks/userContext';
-import { useUserContext } from '../hooks/hooks';
+import React from 'react';
+import { useUserContext } from '../hooks/userContext';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
@@ -104,7 +102,7 @@ const Navbar = () => {
                 <div className="w-12 rounded-full">
                   <Link to={'profile'}>
                     <img
-                      src={user?.picture}
+                      src={user.picture}
                       className=" transition hover:opacity-60"
                     />
                   </Link>

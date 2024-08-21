@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
-import { User } from '../components/models/User';
+import { User } from '../models/User';
 
 export type UserContextType = {
   user: User | undefined;
@@ -15,7 +15,10 @@ type UserContextProps = {
 };
 
 export default function UserContextProvider({ children }: UserContextProps) {
-  const [user, setUser] = useState<User | undefined>(undefined);
+  const [user, setUser] = useState<User | undefined>({
+    username: 'John',
+    password: '123456789',
+  });
   // {
   //   username: 'John',
   //   password: '123456789',
@@ -27,7 +30,7 @@ export default function UserContextProvider({ children }: UserContextProps) {
   );
 }
 
-const useUserContext = () => {
+export const useUserContext = () => {
   const context = useContext(UserContext);
   if (context === undefined) {
     throw new Error('UserContext is not provided');

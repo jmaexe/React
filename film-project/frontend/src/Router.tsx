@@ -1,11 +1,10 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import CharactersPage from './pages/CharactersPage';
 import Home from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
 import NotFound from './pages/NotFound';
 import LoginPage from './pages/LoginPage';
 import Navbar from './components/Navbar';
-import LogoutPage from './pages/LogoutPage';
 import ProtectedRoute from './components/ProtectedRoute';
 
 export const router = createBrowserRouter([

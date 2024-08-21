@@ -7,7 +7,11 @@ type ErrorProps = {
 const Error = ({ error }: ErrorProps) => {
   return (
     <div className="text-error text-xl flex flex-wrap items-center gap-2">
-      <IoIosWarning /> <p>{error.message}</p>
+      <IoIosWarning />{' '}
+      <p>
+        {error.message}
+        {/* aggiungere dropdown{error.stack} */}
+      </p>
     </div>
   );
 };

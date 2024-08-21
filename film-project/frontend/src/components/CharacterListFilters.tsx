@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { CharacterFilters, fetchComics } from './models/Characters';
+import { CharacterFilters, fetchComics } from '../models/Characters';
 import { useQuery } from '@tanstack/react-query';
-import { Comic } from './models/Comics';
+import { Comic } from '../models/Comics';
 import ComicsList from './ComicsList';
-import { useDebounce } from '../hooks/hooks';
+import { useDebounce } from '../hooks/useDebounce';
 
 type CharacterListFiltersProps = {
   onChange: (filters: CharacterFilters) => void;
@@ -44,28 +44,6 @@ const CharacterListFilters = ({ onChange }: CharacterListFiltersProps) => {
           <option value="20">20</option>
           <option value="30">30</option>
         </select>
-        {limit !== 10 && (
-          <button
-            className="badge badge-primary"
-            onClick={() => {
-              setLimit(10);
-            }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              className="inline-block h-4 w-4 stroke-current"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
-              ></path>
-            </svg>
-          </button>
-        )}
       </div>
       {/* <div className="flex items-center gap-2">
         <select

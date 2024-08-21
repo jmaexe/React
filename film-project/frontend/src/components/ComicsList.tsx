@@ -1,5 +1,5 @@
 import React from 'react';
-import { Comic } from './models/Comics';
+import { Comic } from '../models/Comics';
 
 interface ComicsListProps {
   comics: Comic[];

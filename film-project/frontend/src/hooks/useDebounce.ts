@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "./userContext";
 
 export const useDebounce = <T>(value: T, delay: number = 500) => {
     const [debouncedValue, setDebouncedValue] = useState(value);
@@ -11,12 +10,6 @@ export const useDebounce = <T>(value: T, delay: number = 500) => {
     return debouncedValue;
 };
 
-export const useUserContext = () => {
-    const context = useContext(UserContext);
-    if (context === undefined) {
-      throw new Error('UserContext is not provided');
-    }
-    return context;
-  };
+
 
 

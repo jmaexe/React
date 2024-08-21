@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { useUserContext } from '../hooks/hooks';
+import { useUserContext } from '../hooks/userContext';
 import { ReactNode } from 'react';
 type ProtectedRouteProps = {
   children: ReactNode;

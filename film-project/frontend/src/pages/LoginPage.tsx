@@ -1,10 +1,10 @@
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useUserContext } from '../hooks/hooks';
+import { useUserContext } from '../hooks/userContext';
 import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
-import { User } from '../components/models/User';
+import { User } from '../models/User';
 type FormFields = User;
 
 // {
