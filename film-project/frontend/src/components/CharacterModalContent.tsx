@@ -6,7 +6,7 @@ type CharacterModalContentProps = {
 };
 
 const CharacterModalContent = ({ character }: CharacterModalContentProps) => {
-  return <div>CharacterModalContent</div>;
+  return <div>CharacterModalContent {character.name}</div>;
 };
 
 export default CharacterModalContent;

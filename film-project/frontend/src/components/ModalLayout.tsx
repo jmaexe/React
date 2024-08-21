@@ -8,8 +8,8 @@ type ModalLayoutProps = {
 
 const ModalLayout = ({ id, showModal, children }: ModalLayoutProps) => {
   useEffect(() => {
-    showModal && (document.getElementById(id) as HTMLDialogElement).showModal();
-  }, [showModal]);
+    (document.getElementById(id) as HTMLDialogElement).showModal();
+  }, []);
 
   return (
     showModal && (

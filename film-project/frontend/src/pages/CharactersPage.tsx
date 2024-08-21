@@ -33,8 +33,13 @@ const CharactersPage = () => {
   }, [characterId, data]);
 
   const handleClickCard = (id: number) => {
-    setShowModal(!showModal);
+    setShowModal(true);
     setCharacterId(id);
+    console.log('ciao');
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
   };
 
   console.log(characterId, data, new Date().toLocaleTimeString());
@@ -50,14 +55,17 @@ const CharactersPage = () => {
       {error && <Error error={error} />}
       {data && (
         <>
-          <CharactersList
-            characters={data}
-            handleClick={() => handleClickCard}
-          />
-          <ModalLayout id="modal" showModal={showModal}>
-            <ModalContent data={data} type={'character'} />
-            <ModalAction />
-          </ModalLayout>
+          <CharactersList characters={data} handleClick={handleClickCard} />
+          {showModal && (
+            <ModalLayout id="modal" showModal={showModal}>
+              <ModalContent
+                data={character}
+                type={'character'}
+                closeModal={closeModal}
+              />
+              <ModalAction closeModal={closeModal} />
+            </ModalLayout>
+          )}
         </>
       )}
       {isFetching && <Loading />}
