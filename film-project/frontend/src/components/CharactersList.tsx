@@ -1,22 +1,17 @@
-import React, { memo, useMemo, useState } from 'react';
+import React, { memo } from 'react';
 import { Character } from '../models/Character';
 import CharacterCard from './CharacterCard';
 type CharactersListProps = {
   characters: Character[];
   characterId?: number | undefined;
-  setCharacterId: React.Dispatch<React.SetStateAction<number | undefined>>;
+  handleClick: (id: number) => void;
 };
 
 const CharactersList = ({
   characters,
   characterId,
-  setCharacterId,
+  handleClick,
 }: CharactersListProps) => {
-  const character = useMemo(() => {
-    console.log('memo2');
-    return characters.find((c) => c.id === characterId);
-  }, [characterId, characters]);
-
   return (
     <div className=" gap-4 flex flex-wrap justify-center items-center gap-y-6">
       {characters.length == 0 ? (
@@ -26,7 +21,7 @@ const CharactersList = ({
           <CharacterCard
             key={character.id}
             character={character}
-            setCharacterId={setCharacterId}
+            handleClick={handleClick}
           />
         ))
       )}

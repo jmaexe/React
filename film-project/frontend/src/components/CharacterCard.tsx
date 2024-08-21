@@ -5,10 +5,10 @@ import { useUserContext } from '../hooks/userContext';
 
 type CharacterCardProps = {
   character: Character;
-  setCharacterId: React.Dispatch<React.SetStateAction<number | undefined>>;
+  handleClick: (id: number) => void;
 };
 
-const CharacterCard = ({ character, setCharacterId }: CharacterCardProps) => {
+const CharacterCard = ({ character, handleClick }: CharacterCardProps) => {
   const [likeChecked, setLikeChecked] = useState<boolean>(false);
   const { setUser } = useUserContext();
 
@@ -50,7 +50,7 @@ const CharacterCard = ({ character, setCharacterId }: CharacterCardProps) => {
           >
             {likeChecked ? <FcLike /> : <FcLikePlaceholder />}
           </button>
-          <button className="btn" onClick={() => setCharacterId(character.id)}>
+          <button className="btn" onClick={() => handleClick(character.id)}>
             more info
           </button>
         </div>

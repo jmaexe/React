@@ -1,7 +1,6 @@
 import React from 'react';
 import { useUserContext } from '../hooks/userContext';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
-
 const Navbar = () => {
   const navigate = useNavigate();
   const { user, setUser } = useUserContext();
@@ -55,7 +54,7 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <Link className="btn btn-ghost text-xl" to={'home'}>
+          <Link className="btn btn-ghost text-xl" to={''}>
             Marvel Comics
           </Link>
         </div>

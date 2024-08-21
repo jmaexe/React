@@ -6,23 +6,15 @@ import { api } from './axios';
 export const fetchCharacters = async (
   filters: CharacterFilters
 ): Promise<Character[]> => {
-  //   await new Promise((resolve) => setTimeout(resolve, 2000));
-  //   ?limit=${filters.limit}`
-  const response: AxiosResponse = await api.get('/characters', {
-    params: filters,
-  });
-  console.log(response);
-  let { data } = response;
-  console.log(filters, data);
-  if (data.results) {
-    return data.results as Character[];
-  }
-  return data as Character[];
-  // const response: AxiosResponse = await api.get(`/characters${filters.name ? `/${filters.name}`:''}`);
-  // let {data} = response;
-  // console.log(filters,data)
-  // if(data.results) {
-  //    return data.results as Character[];
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  // const response: AxiosResponse = await api.get('/characters', {
+  //   params: filters,
+  // });
+  // console.log(response);
+  // let { data } = response;
+  // console.log(filters, data);
+  // if (data.results) {
+  //   return data.results as Character[];
   // }
   // return data as Character[];
 

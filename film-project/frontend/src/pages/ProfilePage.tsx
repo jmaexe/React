@@ -1,6 +1,8 @@
 import React from 'react';
 import { useUserContext } from '../hooks/userContext';
 import { FcLike } from 'react-icons/fc';
+import ProfileStats from '../components/ProfileStats';
+import ModalLayout from '../components/ModalLayout';
 
 const ProfilePage = () => {
   const { user } = useUserContext();
@@ -12,14 +14,17 @@ const ProfilePage = () => {
           <img src={user?.picture} alt="Album" />
         </figure>
         <div className="card-body gap-5">
-          <h2 className="card-title text-2xl">{user?.username}</h2>
+          <h2 className="card-title text-2xl text-primary">{user?.username}</h2>
           {user && (
             <div>
               {Object.entries(user).map(([key, value]) => {
-                if (['email', 'name'].includes(key)) {
+                if (['email', 'username'].includes(key)) {
                   return (
-                    <p className="text-secondary">
-                      <span className="text-primary">{key} : </span> {value}
+                    <p>
+                      <span className="text-primary font-bold text-xl capitalize">
+                        {key} :{' '}
+                      </span>{' '}
+                      {value}
                     </p>
                   );
                 }
@@ -27,63 +32,29 @@ const ProfilePage = () => {
             </div>
           )}
 
-          <div className="stats shadow">
-            <div className="stat">
-              <div className="stat-figure text-primary">
-                {/* <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  className="inline-block h-8 w-8 stroke-current"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                  ></path>
-                </svg> */}
-                <FcLike size={'48px'} />
-              </div>
-              <div className="stat-title">Total Likes</div>
-              <div className="stat-value text-primary">25.6K</div>
-              {/* <div className="stat-desc">21% more than last month</div> */}
-            </div>
-          </div>
+          <ProfileStats value={user?.likes?.length} title="likes" />
 
           <div className="card-actions justify-end">
             <button className="btn btn-primary btn-md">
               edit your profile
             </button>
-            <label
-              htmlFor="delete-box"
+            <button
               className="btn btn-outline btn-error btn-md"
+              onClick={() =>
+                (
+                  document.getElementById('modal-profile') as HTMLDialogElement
+                ).showModal()
+              }
             >
               Delete your account
-            </label>
+            </button>
           </div>
         </div>
       </div>
-
-      <input type="checkbox" id="delete-box" className="modal-toggle" />
-      <div className="modal" role="dialog">
-        <div className="modal-box">
-          <h3 className="text-lg font-bold text-warning">Are you sure?</h3>
-          <p className="py-4">Do you want to delete this account ? </p>
-          <div className="modal-action">
-            <label htmlFor="delete-box" className="btn btn-primary">
-              Back
-            </label>
-            <label
-              htmlFor="delete-box"
-              className="btn btn-error"
-              onClick={() => console.log('delete account')}
-            >
-              Delete
-            </label>
-          </div>
-        </div>
-      </div>
+      <ModalLayout id="modal-profile">
+        <h3 className="text-lg font-bold text-error">Are you sure?</h3>
+        <p className="py-4">Do you want to delete this account ? </p>
+      </ModalLayout>
     </div>
   );
 };

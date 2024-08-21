@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
 import { User } from '../models/User';
+import iconProfile from '../assets/icon-profile.png';
 
 export type UserContextType = {
   user: User | undefined;
@@ -18,6 +19,8 @@ export default function UserContextProvider({ children }: UserContextProps) {
   const [user, setUser] = useState<User | undefined>({
     username: 'John',
     password: '123456789',
+    picture: iconProfile,
+    likes: [1241241, 5513513, 3212],
   });
   // {
   //   username: 'John',
