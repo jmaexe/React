@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import CharactersList from '../components/CharactersList';
 import CharacterListFilters from '../components/CharacterListFilters';
 import { CharacterFilters } from '../models/Characters';
@@ -7,7 +7,6 @@ import Error from '../components/Error';
 import Loading from '../components/Loading';
 import { fetchCharacters } from '../api/apiCharacters';
 import ModalLayout from '../components/ModalLayout';
-import { Character } from '../models/Character';
 import ModalContent from '../components/ModalContent';
 import ModalAction from '../components/ModalAction';
 
