@@ -1,18 +1,18 @@
 import React from 'react';
 import ButtonCloseModal from './ButtonCloseModal';
 
-type ModalActionProps = {
-  closeModal: () => void;
-};
+type ModalActionProps = {};
 
-const ModalAction = ({ closeModal }: ModalActionProps) => {
+const ModalAction = ({}: ModalActionProps) => {
   return (
     <>
       <div className="modal-action">
         <ButtonCloseModal
           className="btn"
           content={'Close'}
-          handleClick={closeModal}
+          handleClick={() =>
+            (document.getElementById('modal') as HTMLDialogElement).showModal()
+          }
         />
       </div>
     </>

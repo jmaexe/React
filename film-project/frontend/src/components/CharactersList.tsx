@@ -1,17 +1,12 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { Character } from '../models/Character';
 import CharacterCard from './CharacterCard';
 type CharactersListProps = {
   characters: Character[];
-  characterId?: number | undefined;
   handleClick: (id: number) => void;
 };
 
-const CharactersList = ({
-  characters,
-  characterId,
-  handleClick,
-}: CharactersListProps) => {
+const CharactersList = ({ characters, handleClick }: CharactersListProps) => {
   return (
     <div className=" gap-4 flex flex-wrap justify-center items-center gap-y-6">
       {characters.length == 0 ? (

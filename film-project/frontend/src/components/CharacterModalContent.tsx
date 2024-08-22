@@ -1,12 +1,13 @@
-import React from 'react';
-import { Character } from '../models/Character';
+import { useFetchCharacter } from '../utils/useFetchCharacter';
 
 type CharacterModalContentProps = {
-  character: Character;
+  id: number | undefined; // Character ID to fetch from the API
 };
 
-const CharacterModalContent = ({ character }: CharacterModalContentProps) => {
-  return <div>CharacterModalContent {character.name}</div>;
+const CharacterModalContent = ({ id }: CharacterModalContentProps) => {
+  const character = useFetchCharacter(id);
+
+  return <div>CharacterModalContent {character?.name}</div>;
 };
 
 export default CharacterModalContent;

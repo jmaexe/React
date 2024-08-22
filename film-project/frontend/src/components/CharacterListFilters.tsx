@@ -31,7 +31,6 @@ const CharacterListFilters = ({ onChange }: CharacterListFiltersProps) => {
         <select
           ref={selectRefName}
           className="select select-info select-sm w-full max-w-xs"
-          defaultValue={'Select limit'}
           onChange={(e) => {
             setLimit(+e.target.value as CharacterFilters['limit']);
           }}

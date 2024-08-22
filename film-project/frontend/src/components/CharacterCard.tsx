@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Character } from '../models/Character';
 import { FcLike, FcLikePlaceholder } from 'react-icons/fc';
 import { useUserContext } from '../hooks/userContext';
@@ -50,7 +50,15 @@ const CharacterCard = ({ character, handleClick }: CharacterCardProps) => {
           >
             {likeChecked ? <FcLike /> : <FcLikePlaceholder />}
           </button>
-          <button className="btn" onClick={() => handleClick(character.id)}>
+          <button
+            className="btn"
+            onClick={() => {
+              (
+                document.getElementById('modal') as HTMLDialogElement
+              ).showModal();
+              handleClick(character.id);
+            }}
+          >
             more info
           </button>
         </div>

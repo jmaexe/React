@@ -1,22 +1,15 @@
-import React, { Children, useEffect } from 'react';
+import React from 'react';
 
 type ModalLayoutProps = {
   id: string;
   children?: React.ReactNode;
-  showModal: boolean;
 };
 
-const ModalLayout = ({ id, showModal, children }: ModalLayoutProps) => {
-  useEffect(() => {
-    (document.getElementById(id) as HTMLDialogElement).showModal();
-  }, []);
-
+const ModalLayout = ({ id, children }: ModalLayoutProps) => {
   return (
-    showModal && (
-      <dialog id={id} className="modal">
-        {children}
-      </dialog>
-    )
+    <dialog id={id} className="modal">
+      {children}
+    </dialog>
   );
 };
 

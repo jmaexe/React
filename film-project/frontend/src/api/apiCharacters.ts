@@ -4,7 +4,7 @@ import { CharacterFilters } from '../models/Characters';
 import { api } from './axios';
 
 export const fetchCharacters = async (
-  filters: CharacterFilters
+  filters?: CharacterFilters
 ): Promise<Character[]> => {
   await new Promise((resolve) => setTimeout(resolve, 2000));
   // const response: AxiosResponse = await api.get('/characters', {

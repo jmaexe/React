@@ -3,7 +3,7 @@ import React from 'react';
 type ButtonCloseModalProps = {
   className: string;
   content: any;
-  handleClick: () => void;
+  handleClick?: () => void;
 };
 
 const ButtonCloseModal = ({

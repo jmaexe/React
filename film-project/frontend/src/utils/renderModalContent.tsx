@@ -6,7 +6,7 @@ import DeleteAccountModalContent from '../components/DeleteAccountModalContent';
 export const renderModalContent = (type: Types, data: any): React.ReactNode => {
   switch (type) {
     case 'character':
-      return <CharacterModalContent character={data} />;
+      return <CharacterModalContent id={} />;
     case 'user':
       return <p>user</p>;
     case 'deleteAccount':

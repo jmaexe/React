@@ -1,4 +1,3 @@
-import React from 'react';
 import { useUserContext } from '../hooks/userContext';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 const Navbar = () => {
