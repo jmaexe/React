@@ -9,16 +9,22 @@ type CharacterCardProps = {
 };
 
 const CharacterCard = ({ character, handleClick }: CharacterCardProps) => {
-  const [likeChecked, setLikeChecked] = useState<boolean>(false);
-  const { setUser } = useUserContext();
+  const { setUser, user } = useUserContext();
+  const [likeChecked, setLikeChecked] = useState<boolean>(
+    user?.likes.includes(character.id) ? true : false
+  );
 
   const toggleLike = () => {
     setLikeChecked((prevCheck) => !prevCheck);
     setUser((prevUser) => {
-      if (!prevUser?.likes) {
-        return { ...prevUser, likes: [character.id] };
+      let likes = prevUser ? prevUser.likes : [];
+      if (likes?.includes(character.id)) {
+        likes = likes.filter((like) => like !== character.id);
+        console.log('primo if');
+      } else {
+        likes = [...likes, character.id];
       }
-      return { ...prevUser, likes: [...prevUser.likes, character.id] };
+      return { ...prevUser, likes: likes };
     });
   };
 
@@ -63,7 +69,7 @@ const CharacterCard = ({ character, handleClick }: CharacterCardProps) => {
           </button>
         </div>
         <h2 className="card-title text-primary text-lg">{character.name} </h2>
-        {/* <p className="italic text-secondary">{character.id}</p> */}
+        <p className="italic text-secondary">{character.id}</p>
 
         <div className="card-actions justify-around items-center"></div>
       </div>

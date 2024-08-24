@@ -24,7 +24,7 @@ const LoginPage = () => {
   const onSubmit: SubmitHandler<FormFields> = (data) => {
     console.log(data);
     setUser({ ...data });
-    navigate('/home');
+    navigate('/');
   };
 
   return (

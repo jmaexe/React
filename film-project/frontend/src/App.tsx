@@ -7,8 +7,9 @@ import { router } from './Router';
 import ModalContent from './components/ModalContent';
 import { Character } from './models/Character';
 import ModalLayout from './components/ModalLayout';
+import CharacterPage from './pages/CharacterPage';
 const App = () => {
-  return <CharactersPage />;
-  // return <RouterProvider router={router} />;
+  // return <CharacterPage />;
+  return <RouterProvider router={router} />;
 };
 export default App;

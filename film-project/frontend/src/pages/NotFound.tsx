@@ -5,7 +5,7 @@ const NotFound = () => {
   return (
     <div className="flex justify-center flex-col w-full items-center h-full min-h-screen font-bold text-xl gap-3">
       <span className="text-error text-2xl"> Not Found 404</span>
-      <Link to={'home'} className="link link-primary">
+      <Link to={'/'} className="link link-primary">
         return Home{' '}
       </Link>
     </div>

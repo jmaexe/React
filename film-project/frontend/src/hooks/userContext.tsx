@@ -16,7 +16,10 @@ type UserContextProps = {
 };
 
 export default function UserContextProvider({ children }: UserContextProps) {
-  const [user, setUser] = useState<User | undefined>();
+  const [user, setUser] = useState<User | undefined>({
+    name: 'user',
+    likes: [],
+  });
   // username: 'John',
   //   password: '123456789',
   //   picture: iconProfile,

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 type ModalLayoutProps = {
-  id: string;
+  id: string | undefined;
   children?: React.ReactNode;
 };
 

@@ -1,5 +1,6 @@
 import { useUserContext } from '../hooks/userContext';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
+import Root from './Root';
 const Navbar = () => {
   const navigate = useNavigate();
   const { user, setUser } = useUserContext();
@@ -110,7 +111,9 @@ const Navbar = () => {
           )}
         </div>
       </div>
-      <Outlet />
+      <Root>
+        <Outlet />
+      </Root>
     </>
   );
 };

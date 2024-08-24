@@ -10,6 +10,7 @@ import ModalLayout from '../components/ModalLayout';
 import ModalContent from '../components/ModalContent';
 import ModalAction from '../components/ModalAction';
 import CharacterModalContent from '../components/CharacterModalContent';
+import { useUserContext } from '../hooks/userContext';
 
 const CharactersPage = () => {
   const [limit, setLimit] = useState<CharacterFilters['limit']>(10);
@@ -28,11 +29,13 @@ const CharactersPage = () => {
   const handleClickCard = (id: number) => {
     setCharacterId(id);
   };
-
+  const { user } = useUserContext();
   console.log(characterId, data, new Date().toLocaleTimeString());
   return (
     <div className="flex items-center justify-center flex-col w-full h-fit ">
-      <h2 className="font-bold text-3xl text-primary my-6">Characters Page</h2>
+      <h2 className="font-bold text-3xl text-primary my-6">
+        Characters Page {JSON.stringify(user?.likes?.join(','))}
+      </h2>
       <CharacterListFilters
         onChange={(filters: CharacterFilters) => {
           setLimit(filters.limit);
@@ -44,10 +47,9 @@ const CharactersPage = () => {
         <>
           <CharactersList characters={data} handleClick={handleClickCard} />
           <ModalLayout id="modal">
-            <ModalContent>
+            <ModalContent className="max-w-2xl">
               <CharacterModalContent id={characterId} />
             </ModalContent>
-            <ModalAction />
           </ModalLayout>
         </>
       )}

@@ -6,15 +6,9 @@ type ModalActionProps = {};
 const ModalAction = ({}: ModalActionProps) => {
   return (
     <>
-      <div className="modal-action">
-        <ButtonCloseModal
-          className="btn"
-          content={'Close'}
-          handleClick={() =>
-            (document.getElementById('modal') as HTMLDialogElement).showModal()
-          }
-        />
-      </div>
+      <form className="modal-action">
+        <ButtonCloseModal className="btn" content={'Close'} />
+      </form>
     </>
   );
 };
