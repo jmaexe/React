@@ -20,7 +20,6 @@ const CharacterCard = ({ character, handleClick }: CharacterCardProps) => {
       let likes = prevUser ? prevUser.likes : [];
       if (likes?.includes(character.id)) {
         likes = likes.filter((like) => like !== character.id);
-        console.log('primo if');
       } else {
         likes = [...likes, character.id];
       }
