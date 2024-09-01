@@ -2,11 +2,12 @@ const ts = 1;
 const md5 = require('md5');
 const getAllCharacters = async (req, res) => {
   const { limit, name } = req.query;
+  console.log(limit, name);
   //errore encode fetch
   const baseURL = new URL(`${process.env.BASE_URL}/characters`);
   const params = new URLSearchParams();
-  limit !== 0 ? params.append('limit', limit) : null;
-  name !== '' ? params.append('nameStartsWith', name) : null;
+  limit && limit !== 0 ? params.append('limit', limit) : null;
+  name && name !== '' ? params.append('nameStartsWith', name) : null;
   params.append('apikey', process.env.PUBLIC_KEY);
   params.append(
     'hash',
@@ -15,7 +16,6 @@ const getAllCharacters = async (req, res) => {
   params.append('ts', ts);
 
   const response = await fetch(baseURL + '?' + params);
-  console.log(response.url);
   const jsonData = await response.json();
   if (jsonData.code == 200 && jsonData.status == 'Ok') {
     const { results } = jsonData.data;
@@ -43,7 +43,28 @@ const getCharacterByName = async (req, res) => {
   }
 };
 
+const getCharacterById = async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  const response = await fetch(
+    `${process.env.BASE_URL}/characters/${id}?apikey=${
+      process.env.PUBLIC_KEY
+    }&hash=${md5(
+      ts + process.env.PRIVATE_KEY + process.env.PUBLIC_KEY
+    )}&ts=${ts}`
+  );
+  console.log(response.url);
+  const jsonData = await response.json();
+  if (jsonData.code == 200 && jsonData.status == 'Ok') {
+    if (jsonData.data.results.length > 0) {
+      return res.json(jsonData.data.results[0]);
+    }
+  }
+  return res.status(500).send(`error fetching data character ${id}`);
+};
+
 module.exports = {
   getAllCharacters,
   getCharacterByName,
+  getCharacterById,
 };

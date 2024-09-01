@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { Character } from '../models/Character';
 import { FcLike, FcLikePlaceholder } from 'react-icons/fc';
-import { useUserContext } from '../hooks/userContext';
+import { useUserContext } from '../hooks/useUserContext';
+import { Link } from 'react-router-dom';
 
 type CharacterCardProps = {
   character: Character;
-  handleClick: (id: number) => void;
 };
 
-const CharacterCard = ({ character, handleClick }: CharacterCardProps) => {
+const CharacterCard = ({ character }: CharacterCardProps) => {
   const { setUser, user } = useUserContext();
   const [likeChecked, setLikeChecked] = useState<boolean>(
     user?.likes.includes(character.id) ? true : false
@@ -55,17 +55,9 @@ const CharacterCard = ({ character, handleClick }: CharacterCardProps) => {
           >
             {likeChecked ? <FcLike /> : <FcLikePlaceholder />}
           </button>
-          <button
-            className="btn"
-            onClick={() => {
-              (
-                document.getElementById('modal') as HTMLDialogElement
-              ).showModal();
-              handleClick(character.id);
-            }}
-          >
+          <Link className="btn" to={`${character.id}`}>
             more info
-          </button>
+          </Link>
         </div>
         <h2 className="card-title text-primary text-lg">{character.name} </h2>
         <p className="italic text-secondary">{character.id}</p>

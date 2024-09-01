@@ -1,5 +1,5 @@
 import React from 'react';
-import { useUserContext } from '../hooks/userContext';
+import { useUserContext } from '../hooks/useUserContext';
 import { FcLike } from 'react-icons/fc';
 import ProfileStats from '../components/ProfileStats';
 import ModalLayout from '../components/ModalLayout';

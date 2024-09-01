@@ -1,9 +1,8 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { User } from '../models/User';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
-import { useUserContext } from '../hooks/userContext';
+import { useUserContext } from '../hooks/useUserContext';
 import { useNavigate } from 'react-router-dom';
 
 type FormFields = User;

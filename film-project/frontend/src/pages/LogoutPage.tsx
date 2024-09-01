@@ -1,5 +1,5 @@
 import React from 'react';
-import { useUserContext } from '../hooks/hooks';
+import { useUserContext } from '../hooks/useUserContext';
 
 const LogoutPage = () => {
   const { setUser } = useUserContext();

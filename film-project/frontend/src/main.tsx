@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import UserContextProvider from './hooks/userContext.tsx';
+import UserContextProvider from './hooks/useUserContext.tsx';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 const queryClient = new QueryClient();
 

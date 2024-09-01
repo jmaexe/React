@@ -7,6 +7,7 @@ type CharacterModalContentProps = {
 };
 
 const CharacterModalContent = ({ id }: CharacterModalContentProps) => {
+  console.log(id);
   const character = useFetchCharacter(id);
   console.log(JSON.stringify(character));
   return (

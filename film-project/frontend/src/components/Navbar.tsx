@@ -1,4 +1,4 @@
-import { useUserContext } from '../hooks/userContext';
+import { useUserContext } from '../hooks/useUserContext';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import Root from './Root';
 const Navbar = () => {

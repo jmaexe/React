@@ -6,6 +6,7 @@ import NotFound from './pages/NotFound';
 import LoginPage from './pages/LoginPage';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
+import CharacterPage from './pages/CharacterPage';
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,14 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <CharactersPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/characters/:id',
+        element: (
+          <ProtectedRoute>
+            <CharacterPage />
           </ProtectedRoute>
         ),
       },
