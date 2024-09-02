@@ -11,9 +11,10 @@ import { useUserContext } from '../hooks/useUserContext';
 const CharactersPage = () => {
   const [limit, setLimit] = useState<CharacterFilters['limit']>(10);
   const [name, setName] = useState<CharacterFilters['name']>('');
+  const [comics, setComics] = useState<CharacterFilters['comics']>(0);
   const { data, isFetching, error } = useQuery({
-    queryKey: ['characters', { limit, name }],
-    queryFn: () => fetchCharacters({ limit, name }),
+    queryKey: ['characters', { limit, name, comics }],
+    queryFn: () => fetchCharacters({ limit, name, comics }),
     refetchOnWindowFocus: false,
     refetchInterval: false,
     refetchIntervalInBackground: false,
@@ -31,6 +32,8 @@ const CharactersPage = () => {
         onChange={(filters: CharacterFilters) => {
           setLimit(filters.limit);
           setName(filters.name);
+          setComics(filters.comics);
+          console.log('click');
         }}
       />
       {error && <Error error={error} />}

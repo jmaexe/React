@@ -1,4 +1,3 @@
-import React from 'react';
 import { Comic } from '../models/Comics';
 
 interface ComicsListProps {
@@ -6,10 +5,13 @@ interface ComicsListProps {
 }
 
 const ComicsList = ({ comics }: ComicsListProps) => {
+  comics = comics.filter(
+    (c) => c.characters?.items && c.characters?.items?.length > 0
+  );
   return (
     <>
       {comics.map((comic) => (
-        <option value={`${comic.title}`} key={comic.id}>
+        <option value={`${comic.id}`} key={comic.id}>
           {comic.title}
         </option>
       ))}

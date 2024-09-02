@@ -1,7 +1,6 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { CharacterFilters, fetchComics } from '../models/Characters';
 import { useQuery } from '@tanstack/react-query';
-import { Comic } from '../models/Comics';
 import ComicsList from './ComicsList';
 import { useDebounce } from '../hooks/useDebounce';
 
@@ -11,20 +10,24 @@ type CharacterListFiltersProps = {
 
 const CharacterListFilters = ({ onChange }: CharacterListFiltersProps) => {
   const [limit, setLimit] = useState<CharacterFilters['limit']>(10);
-  const [comics, setComics] = useState<CharacterFilters['comics']>('');
+  const [comics, setComics] = useState<CharacterFilters['comics']>(0);
   const [name, setName] = useState<CharacterFilters['name']>('');
   const debouncedName = useDebounce(name);
   const selectRefName = useRef<HTMLSelectElement | null>(null);
-
-  // const { data, isFetching } = useQuery({
-  //   queryKey: ['comics'],
-  //   queryFn: () => fetchComics(),
-  //   refetchOnWindowFocus: false,
-  // });
+  const refComics = useRef<HTMLSelectElement | null>(null);
+  const { data, isFetching } = useQuery({
+    queryKey: ['comics'],
+    queryFn: () => fetchComics(),
+    refetchOnWindowFocus: false,
+    refetchInterval: false,
+    refetchIntervalInBackground: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+  });
 
   useEffect(() => {
-    onChange({ limit, name: debouncedName });
-  }, [limit, debouncedName]);
+    onChange({ limit, name: debouncedName, comics });
+  }, [limit, debouncedName, comics]);
   return (
     <div className="w-full px-4 gap-5 mb-5 pb-5 flex justify-between">
       <div className="flex items-center gap-2">
@@ -34,9 +37,10 @@ const CharacterListFilters = ({ onChange }: CharacterListFiltersProps) => {
           onChange={(e) => {
             setLimit(+e.target.value as CharacterFilters['limit']);
           }}
+          defaultValue={'Select limit'}
           value={limit}
         >
-          <option disabled defaultValue={'Select limit'}>
+          <option disabled value={'Select limit'}>
             Select Limit
           </option>
           <option value="10">10</option>
@@ -44,13 +48,13 @@ const CharacterListFilters = ({ onChange }: CharacterListFiltersProps) => {
           <option value="30">30</option>
         </select>
       </div>
-      {/* <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2">
         <select
           className="select select-info select-sm w-full max-w-xs"
-          ref={selectRefAge}
           onChange={(e) => {
-            setComics(e.target.value as CharacterFilters['comics']);
+            setComics(+e.target.value as CharacterFilters['comics']);
           }}
+          ref={refComics}
           defaultValue={'Select comic'}
         >
           <option disabled value={'Select comic'}>
@@ -59,22 +63,32 @@ const CharacterListFilters = ({ onChange }: CharacterListFiltersProps) => {
           {data && <ComicsList comics={data} />}
           {isFetching && <option>sta caricando i comics</option>}
         </select>
-        <button className="badge badge-primary" onClick={() => {}}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            className="inline-block h-4 w-4 stroke-current"
+        {comics && comics > 0 ? (
+          <button
+            className="badge badge-primary"
+            onClick={() => {
+              refComics.current
+                ? (refComics.current.value = 'Select comic')
+                : null;
+              setComics(0);
+            }}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M6 18L18 6M6 6l12 12"
-            ></path>
-          </svg>
-        </button>
-      </div> */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              className="inline-block h-4 w-4 stroke-current"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg>
+          </button>
+        ) : null}
+      </div>
       <div className="flex items-center gap-2">
         <label className="input input-bordered flex items-center gap-2">
           <input

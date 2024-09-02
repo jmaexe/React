@@ -6,12 +6,10 @@ import { api } from './axios';
 export const fetchCharacters = async (
   filters?: CharacterFilters
 ): Promise<Character[]> => {
-  // await new Promise((resolve) => setTimeout(resolve, 2000));
   console.log('filters', filters);
   const response: AxiosResponse = await api.get('/characters', {
     params: filters,
   });
-  console.log(response);
   let { data } = response;
   console.log(filters, data);
   if (data.results) {

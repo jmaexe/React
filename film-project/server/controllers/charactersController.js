@@ -1,10 +1,18 @@
 const ts = 1;
 const md5 = require('md5');
 const getAllCharacters = async (req, res) => {
-  const { limit, name } = req.query;
-  console.log(limit, name);
-  //errore encode fetch
+  const { limit, name, comics } = req.query;
+  console.log(comics);
   const baseURL = new URL(`${process.env.BASE_URL}/characters`);
+  if (comics && comics > 0) {
+    const characters = await getCharactersByComic(comics);
+    if (name && name !== '') {
+      characters = characters.name.contains(name);
+    }
+    if (limit && limit !== 0) {
+      return res.json(characters.slice(0, limit));
+    }
+  }
   const params = new URLSearchParams();
   limit && limit !== 0 ? params.append('limit', limit) : null;
   name && name !== '' ? params.append('nameStartsWith', name) : null;
@@ -61,6 +69,23 @@ const getCharacterById = async (req, res) => {
     }
   }
   return res.status(500).send(`error fetching data character ${id}`);
+};
+
+const getCharactersByComic = async (comics) => {
+  const response = await fetch(
+    `${process.env.BASE_URL}/comics/${comics}/characters?apikey=${
+      process.env.PUBLIC_KEY
+    }&hash=${md5(
+      ts + process.env.PRIVATE_KEY + process.env.PUBLIC_KEY
+    )}&ts=${ts}`
+  );
+  const jsonData = await response.json();
+  if (jsonData.code == 200 && jsonData.status == 'Ok') {
+    if (jsonData.data.results.length > 0) {
+      return jsonData.data.results;
+    }
+  }
+  return `error fetching data characters in comics: ${comics}`;
 };
 
 module.exports = {
