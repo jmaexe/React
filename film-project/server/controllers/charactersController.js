@@ -2,12 +2,15 @@ const ts = 1;
 const md5 = require('md5');
 const getAllCharacters = async (req, res) => {
   const { limit, name, comics } = req.query;
-  console.log(comics);
   const baseURL = new URL(`${process.env.BASE_URL}/characters`);
   if (comics && comics > 0) {
-    const characters = await getCharactersByComic(comics);
+    let characters = await getCharactersByComic(comics);
     if (name && name !== '') {
-      characters = characters.name.contains(name);
+      console.log(name);
+      console.log(characters[0].name);
+      characters = characters.filter((c) =>
+        c.name.toLowerCase().includes(name)
+      );
     }
     if (limit && limit !== 0) {
       return res.json(characters.slice(0, limit));
@@ -33,9 +36,7 @@ const getAllCharacters = async (req, res) => {
   }
 };
 
-const getCharacterByName = async (req, res) => {
-  const { name } = req.params;
-
+const getCharacterByName = async (name) => {
   const response = await fetch(
     `${process.env.BASE_URL}/characters?nameStartsWith=${name}&apikey=${
       process.env.PUBLIC_KEY
@@ -45,9 +46,9 @@ const getCharacterByName = async (req, res) => {
   );
   const jsonData = await response.json();
   if (jsonData.code == 200 && jsonData.status == 'Ok') {
-    res.json(jsonData);
+    return jsonData.data;
   } else {
-    res.status(500).send('error fetching data character: ' + name);
+    return 'error fetching data character: ' + name;
   }
 };
 

@@ -17,6 +17,5 @@ router.use((req, res, next) => {
 });
 
 router.get('/characters', getAllCharacters);
-// router.get('/characters/:name', getCharacterByName);
 router.get('/characters/:id', getCharacterById);
 module.exports = router;
