@@ -10,7 +10,7 @@ const Movie = ({ data }: MovieProps) => {
     <Pressable
       onPress={() =>
         router.push({
-          pathname: './movie/[id]',
+          pathname: '/Movie/[id]',
           params: { id: data.id },
         })
       }
