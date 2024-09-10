@@ -25,3 +25,13 @@ export const getMovieById = async (id: number) => {
   }
   return undefined;
 };
+
+export const fetchCastByFilmId = async (id: number) => {
+  const response: AxiosResponse = await api.get(`movie/${id}/credits`);
+
+  const { data, status, statusText } = response;
+  if (data && status === 200) {
+    return data as Cast[];
+  }
+  return undefined;
+};

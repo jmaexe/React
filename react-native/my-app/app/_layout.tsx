@@ -10,7 +10,7 @@ const RootLayout = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <NavigationContainer>
-        <Stack.Screen />
+        <Stack.Screen name="Home" />
       </NavigationContainer>
     </QueryClientProvider>
   );

@@ -3,7 +3,7 @@ import MovieList from '@/components/MovieList';
 import { RootStackParamsList } from '@/router';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useQuery } from '@tanstack/react-query';
-import { View, Text } from 'react-native';
+import { View, Text, StatusBar } from 'react-native';
 
 type HomeScreenProps = NativeStackScreenProps<RootStackParamsList, 'Home'>;
 const HomeScreen = ({}: HomeScreenProps) => {
