@@ -31,7 +31,7 @@ export const fetchCastByFilmId = async (id: number) => {
 
   const { data, status, statusText } = response;
   if (data && status === 200) {
-    return data as Cast[];
+    return data.cast as Cast[];
   }
   return undefined;
 };

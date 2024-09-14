@@ -1,5 +1,5 @@
 type Cast = {
-  adult: false;
+  adult: boolean;
   gender: number;
   id: number;
   known_for_department: string;
